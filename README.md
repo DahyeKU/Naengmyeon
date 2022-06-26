@@ -1,4 +1,3 @@
-# Naengmyeon
   <!DOCTYPE html>
 <html lang="ko">
     <head>
@@ -100,7 +99,16 @@
 {"type": "Feature", "properties": {"name": "우래옥", "class": "Restaurant", "category": "맛있조-한식", "form": "point", "address": "null", "refurl": "null"}, "geometry": {"type": "Point", "coordinates": [126.9903237, 37.5682698]}},
 ];  
 
+            L.geoJson(geodata, {
+                onEachFeature: function (feature, layer) {
+                            layer.bindPopup('<a href="' + feature.properties.refurl + '" target="_blank"><center><big><b>' + "[" + feature.properties.class + "]" +" " + feature.properties.name + '</b></big></a><br/>' + feature.properties.address)},
 
+                pointToLayer: function(feature, latlng) { 
+                    switch (feature.properties.category) {
+                                case '맛있조-한식(평양냉면)': return L.marker(latlng, {icon: buildingIcon}).addTo(part_3);
+                        }
+                    }
+                });
     
 
 	    </script> 
