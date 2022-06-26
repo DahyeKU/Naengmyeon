@@ -100,6 +100,7 @@
 {"type": "Feature", "properties": {"name": "우래옥", "class": "Restaurant", "category": "맛있조-한식", "form": "point", "address": "null", "refurl": "null"}, "geometry": {"type": "Point", "coordinates": [126.9903237, 37.5682698]}},
 ];  
 
+
     
 
 	    </script> 
