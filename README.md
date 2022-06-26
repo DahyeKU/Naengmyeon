@@ -1,1 +1,107 @@
 # Naengmyeon
+  <!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <title>KU 22-1 데이터인문학 지도</title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
+        <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
+        <style>
+            html, body, #mapid{
+                height: 100%;
+                margin: 0;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div id = 'mapid'>
+        </div>
+        <script>
+            var map = L.map('mapid').setView([37.5378, 127.0253], 11);
+            var osm = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
+                attribution:'&copy; <a href="http://openstreetmap.org">OpenStreetMap</a> Contributors'
+            }).addTo(map);
+            var GoogleStreets = L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}',{
+                maxZoom: 20,
+                subdomains:['mt0','mt1','mt2','mt3']
+            })
+            var GoogleSat = L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}',{
+                maxZoom: 20,
+                subdomains:['mt0','mt1','mt2','mt3']
+            })
+            var GoogleTerrain = L.tileLayer('http://{s}.google.com/vt/lyrs=p&x={x}&y={y}&z={z}',{
+                maxZoom: 20,
+                subdomains:['mt0','mt1','mt2','mt3']
+            })
+            var GoogleHybrid = L.tileLayer('http://{s}.google.com/vt/lyrs=s,h&x={x}&y={y}&z={z}',{
+                maxZoom: 20,
+                subdomains:['mt0','mt1','mt2','mt3']
+            })
+            var Stamen_Watercolor = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.{ext}', {
+                attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+                subdomains: 'abcd',
+                minZoom: 1,
+                maxZoom: 16,
+                ext: 'jpg'
+            });
+
+            var baseMaps = {
+                "GoogleStreetMap": GoogleStreets,
+                "GoogleSatelliteMap":GoogleSat,
+                "GoogleTerrain":GoogleTerrain,
+                "GoogleHybrid":GoogleHybrid,
+                "Watercolor":Stamen_Watercolor,
+                "OpenStreetMap":osm
+            };
+            
+            L.control.layers(baseMaps).addTo(map);
+  
+            var myIcon = L.Icon.extend({
+                options: {
+                shadowUrl: 'image/myicon_shadow.png',
+                iconSize:     [46, 62],
+                shadowSize:   [44, 22],
+                iconAnchor:   [23, 62],
+                shadowAnchor: [4, 22],
+                popupAnchor:  [0, -62]
+                }
+            });
+
+            var castleIcon = new myIcon({iconUrl: 'image/myicon_castle.png'}),
+                mountainIcon = new myIcon({iconUrl: 'image/myicon_mountain.png'}),
+                mountainroadIcon = new myIcon({iconUrl: 'image/myicon_mountainroad.png'}),
+                horseIcon = new myIcon({iconUrl: 'image/myicon_horse.png'});
+                buildingIcon = new myIcon({iconUrl: 'image/myicon_building.png'});
+                villageIcon = new myIcon({iconUrl: 'image/myicon_village.png'});
+
+                L.icon = function (options) {
+                    return new L.Icon(options);
+                };
+      
+            var part_1 = L.layerGroup();
+
+            map.addLayer(part_1)
+
+            var overlays = {
+                "맛있조-한식(평양냉면)": part_1,
+            };
+
+            var ctr_mapLayers = L.control.layers(null, overlays, {collapsed:false, position:'bottomleft'}).addTo(map);
+        
+            var geodata =[
+
+{"type": "Feature", "properties": {"name": "능라도", "class": "Restaurant", "category": "맛있조-한식", "form": "point", "address": "null", "refurl": "http://neungradogn.cityfood.co.kr/"}, "geometry": {"type": "Point", "coordinates": [127.05552, 37.50949]}},
+{"type": "Feature", "properties": {"name": "봉피양", "class": "Restaurant", "category": "맛있조-한식", "form": "point", "address": "null", "refurl": "https://bonpiyang.modoo.at/"}, "geometry": {"type": "Point", "coordinates": [127.1259879, 37.5101881]}},
+{"type": "Feature", "properties": {"name": "정인면옥", "class": "Restaurant", "category": "맛있조-한식", "form": "point", "address": "null", "refurl": "https://junginmyunok.modoo.at/"}, "geometry": {"type": "Point", "coordinates": [126.9217493, 37.5306271]}},
+{"type": "Feature", "properties": {"name": "필동면옥", "class": "Restaurant", "category": "맛있조-한식", "form": "point", "address": "null", "refurl": "null"}, "geometry": {"type": "Point", "coordinates": [126.9969996, 37.5603604]}},
+{"type": "Feature", "properties": {"name": "남포면옥", "class": "Restaurant", "category": "맛있조-한식", "form": "point", "address": "null", "refurl": "null"}, "geometry": {"type": "Point", "coordinates": [126.9733705, 37.5670813]}},
+{"type": "Feature", "properties": {"name": "진미 평양냉면", "class": "Restaurant", "category": "맛있조-한식", "form": "point", "address": "null", "refurl": "https://jinmipy.modoo.at/"}, "geometry": {"type": "Point", "coordinates": [126.9690163, 37.5161247]}},
+{"type": "Feature", "properties": {"name": "우래옥", "class": "Restaurant", "category": "맛있조-한식", "form": "point", "address": "null", "refurl": "null"}, "geometry": {"type": "Point", "coordinates": [126.9903237, 37.5682698]}},
+];  
+
+    
+
+	    </script> 
+    </body>
+</html>
